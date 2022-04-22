@@ -22,6 +22,7 @@ RSpec.describe Dictionary do
 
   it 'can populate the dictionary' do
     dictionary = Dictionary.new("Braille")
+    # require 'pry'; binding.pry
     expect(dictionary.lookup_table["r"]).to eq(".0\n..\n.0")
   end
 
