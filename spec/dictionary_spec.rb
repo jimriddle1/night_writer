@@ -41,4 +41,16 @@ RSpec.describe Dictionary do
     expect(dictionary.lookup_table.count).to eq(27)
   end
 
+  it 'can verify uniquness and length of each braille character' do
+    dictionary = Dictionary.new("braille")
+    expect(dictionary.lookup_table.values.uniq.count).to eq(dictionary.lookup_table.values.count)
+
+    array = dictionary.lookup_table.values
+    correct_length = 8
+    place_holder = array.select do |letter|
+      letter.length != correct_length
+    end
+
+    expect(place_holder.count).to eq(0)
+  end
 end
