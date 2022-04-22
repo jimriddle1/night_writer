@@ -15,7 +15,14 @@ class Dictionary
     hash = {}
     hash["r"] = ".0\n..\n.0"
     return hash
-    # require 'pry'; binding.pry
+  end
+
+  def write(character)
+    if @lookup_table.keys.include?(character) == false
+      "Invalid Input"
+    else
+      @lookup_table[character]
+    end
   end
 
 end
