@@ -17,7 +17,38 @@ class Dictionary
 
   def create_dictionary
     hash = {}
+    hash["a"] = "0.\n..\n.."
+    hash["b"] = "0.\n0.\n.."
+    hash["c"] = "00\n..\n.."
+    hash["d"] = "00\n.0\n.."
+    hash["e"] = "0.\n.0\n.."
+    hash["f"] = "00\n0.\n.."
+    hash["g"] = "00\n00\n.."
+
+    hash["h"] = "0.\n00\n.."
+    hash["i"] = ".0\n0.\n.."
+    hash["j"] = ".0\n00\n.."
+    hash["k"] = "0.\n..\n0."
+    hash["l"] = "0.\n0.\n0."
+    hash["m"] = "00\n..\n0."
+    hash["n"] = "00\n.0\n0."
+    hash["o"] = "0.\n.0\n0."
+    hash["p"] = "00\n0.\n0."
+
+    hash["q"] = "00\n00\n0."
     hash["r"] = "0.\n00\n0."
+    hash["s"] = ".0\n0.\n0."
+    hash["t"] = ".0\n00\n0."
+    hash["u"] = "0.\n..\n00"
+    hash["v"] = "0.\n0.\n00"
+    hash["w"] = ".0\n00\n.0"
+    hash["x"] = "00\n..\n00"
+    hash["y"] = "00\n.0\n00"
+    hash["z"] = "0.\n.0\n00"
+
+    hash[" "] = "..\n..\n.."
+
+    # require 'pry'; binding.pry
     return hash
   end
 
