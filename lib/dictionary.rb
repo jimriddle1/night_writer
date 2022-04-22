@@ -47,8 +47,6 @@ class Dictionary
     hash["z"] = "0.\n.0\n00"
 
     hash[" "] = "..\n..\n.."
-
-    # require 'pry'; binding.pry
     return hash
   end
 
@@ -58,6 +56,17 @@ class Dictionary
     else
       @lookup_table[character]
     end
+  end
+
+  def write_to_file
+    braille = File.open("braille_test.txt", "w")
+
+    text = @text_input.map do |character|
+      @lookup_table[character]
+    end
+    output = text.join
+    braille.write(output)
+    braille.close
   end
 
 end
