@@ -53,4 +53,10 @@ RSpec.describe Dictionary do
 
     expect(place_holder.count).to eq(0)
   end
+
+  it 'can write one character to a file' do
+    dictionary = Dictionary.new("h")
+    dictionary.write_to_file
+    expect(File.size("braille.txt")).to eq(8)
+  end
 end
