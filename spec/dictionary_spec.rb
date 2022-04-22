@@ -21,7 +21,7 @@ RSpec.describe Dictionary do
   end
 
   it 'can create an r' do
-    dictionary = Dictionary.new("Braille")
+    dictionary = Dictionary.new("braille")
     expect(dictionary.create_r).to eq("0.\n00\n0.")
   end
 
@@ -31,9 +31,14 @@ RSpec.describe Dictionary do
   end
 
   it 'can read a letter in and output the brail' do
-    dictionary = Dictionary.new("Braille")
+    dictionary = Dictionary.new("braille")
     expect(dictionary.write('~')). to eq("Invalid Input")
     expect(dictionary.write('r')). to eq("0.\n00\n0.")
+  end
+
+  it 'can populate all 26 lower case letters and have a space' do
+    dictionary = Dictionary.new("braille")
+    expect(dictionary.lookup_table.count).to eq(27)
   end
 
 end
