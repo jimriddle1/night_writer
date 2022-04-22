@@ -10,9 +10,12 @@ message = File.open(file_name_1, "r")
 braille = File.open(file_name_2, "w")
 
 text_array = message.readlines
-character_count = text_array.join.length - 1
+text = text_array.join
+character_count = text_array.length - 1
 
 
 puts "Created '#{ARGV[1]}' containing #{character_count} characters"
 
-require 'pry'; binding.pry
+
+braille.write(text)
+# require 'pry'; binding.pry
