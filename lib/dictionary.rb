@@ -8,8 +8,11 @@ class Dictionary
   end
 
   def split_text(input)
-    input.split('')[0..-2]
-    #for some reason my message txt file always has an extra line at the end
+    text = input.split('')
+    if text[-1] == "\n"
+      return text[0..-2]
+    end
+    return text
   end
 
   def create_r

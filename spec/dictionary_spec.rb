@@ -54,14 +54,20 @@ RSpec.describe Dictionary do
     expect(place_holder.count).to eq(0)
   end
 
-  xit 'can write one character to a file' do
+  it 'can write one character to a file' do
     dictionary = Dictionary.new("h")
     dictionary.write_to_file
     # require 'pry'; binding.pry
-    expect(File.size("braille.txt")).to eq(8)
+    expect(File.size("braille.txt")).to eq(9)
   end
 
-  xit 'can write multiple characters to the main file' do
+  it 'can know when the input has a line break vs. not' do
+    dictionary = Dictionary.new("hello")
+    dictionary_2 = Dictionary.new("hello\n")
+    expect(dictionary.text_input).to eq(dictionary_2.text_input)
+  end
+
+  it 'can write multiple characters to the main file' do
     dictionary = Dictionary.new("hello world")
     dictionary.write_to_file
     # 11 characters times 6 plus 3 line indentations equals 69
@@ -69,10 +75,10 @@ RSpec.describe Dictionary do
   end
 
   it 'can write a new line indentation' do
-    dictionary = Dictionary.new("aaaabbbbccccddddeeeeffffgggghhhhiiiijjjj")
+    dictionary = Dictionary.new("aaaabbbbccccddddeeeeffffgggghhhhiiiijjjjk")
     dictionary.write_to_file
-    # 11 characters times 6 plus 3 line indentations equals 69
-    expect(File.size("braille.txt")).to eq(69)
+    # 41 characters * 6 plus 6 line indentations = 252
+    expect(File.size("braille.txt")).to eq(252)
   end
 
 end
