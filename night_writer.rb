@@ -17,5 +17,8 @@ character_count = text_array.length - 1
 puts "Created '#{ARGV[1]}' containing #{character_count} characters"
 
 
+# puts "..\n00\n.."
+# puts '..\n00\n..'
+
 braille.write(text)
 # require 'pry'; binding.pry
