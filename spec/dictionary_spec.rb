@@ -6,8 +6,13 @@ require './lib/dictionary'
 RSpec.describe Dictionary do
 
   it 'exists' do
-    dictionary = Dictionary.new("Braille")
+    dictionary = Dictionary.new("hello")
     expect(dictionary).to be_an_instance_of(Dictionary)
+  end
+
+  it 'can take the input as text and split it up' do
+    dictionary = Dictionary.new("hello")
+    expect(dicitonary.text_input).to eq(['h','e','l','l','o'])
   end
 
   it 'has readable attrs' do
