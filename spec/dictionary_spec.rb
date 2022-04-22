@@ -10,31 +10,30 @@ RSpec.describe Dictionary do
     expect(dictionary).to be_an_instance_of(Dictionary)
   end
 
-  it 'can take the input as text and split it up' do
+  it 'has readable attrs' do
     dictionary = Dictionary.new("hello")
-    expect(dicitonary.text_input).to eq(['h','e','l','l','o'])
+    expect(dictionary.text_input).to be_an_instance_of(Array)
   end
 
-  it 'has readable attrs' do
-    dictionary = Dictionary.new("Braille")
-    expect(dictionary.name).to eq("Braille")
+  it 'can take the input as text and split it up' do
+    dictionary = Dictionary.new("hello")
+    expect(dictionary.text_input).to eq(['h','e','l','l','o'])
   end
 
   it 'can create an r' do
     dictionary = Dictionary.new("Braille")
-    expect(dictionary.create_r).to eq(".0\n..\n.0")
+    expect(dictionary.create_r).to eq("0.\n00\n0.")
   end
 
   it 'can populate the dictionary' do
     dictionary = Dictionary.new("Braille")
-    # require 'pry'; binding.pry
-    expect(dictionary.lookup_table["r"]).to eq(".0\n..\n.0")
+    expect(dictionary.lookup_table["r"]).to eq("0.\n00\n0.")
   end
 
   it 'can read a letter in and output the brail' do
     dictionary = Dictionary.new("Braille")
     expect(dictionary.write('~')). to eq("Invalid Input")
-    expect(dictionary.write('r')). to eq(".0\n..\n.0")
+    expect(dictionary.write('r')). to eq("0.\n00\n0.")
   end
 
 end

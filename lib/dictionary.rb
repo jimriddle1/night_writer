@@ -12,12 +12,12 @@ class Dictionary
   end
 
   def create_r
-    ".0\n..\n.0"
+    "0.\n00\n0."
   end
 
   def create_dictionary
     hash = {}
-    hash["r"] = ".0\n..\n.0"
+    hash["r"] = "0.\n00\n0."
     return hash
   end
 
