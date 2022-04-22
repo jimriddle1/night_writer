@@ -8,7 +8,8 @@ class Dictionary
   end
 
   def split_text(input)
-    input.split('')
+    input.split('')[0..-2]
+    #for some reason my message txt file always has an extra line at the end
   end
 
   def create_r
@@ -59,8 +60,6 @@ class Dictionary
   end
 
   def write_to_file
-    line_numbers = @text_input.count / 20 + 1
-    # require 'pry'; binding.pry
     braille = File.open("braille.txt", "w")
     top_row = ""
     mid_row = ""
@@ -71,7 +70,6 @@ class Dictionary
       top_row += "#{@lookup_table[character][0]}#{@lookup_table[character][1]}"
       mid_row += "#{@lookup_table[character][2]}#{@lookup_table[character][3]}"
       bot_row += "#{@lookup_table[character][4]}#{@lookup_table[character][5]}"
-
       if count % 40 == 0
         braille.write("#{top_row}\n")
         braille.write("#{mid_row}\n")
@@ -81,12 +79,9 @@ class Dictionary
         bot_row = ""
       end
     end
-
       braille.write("#{top_row}\n")
       braille.write("#{mid_row}\n")
       braille.write("#{bot_row}\n")
-    # output = text.join
-    # braille.write(output)
     braille.close
   end
 
