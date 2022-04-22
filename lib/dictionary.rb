@@ -59,12 +59,13 @@ class Dictionary
   end
 
   def write_to_file
-    braille = File.open("braille_test.txt", "w")
+    braille = File.open("braille.txt", "w")
 
     text = @text_input.map do |character|
       @lookup_table[character]
     end
     output = text.join
+    require 'pry'; binding.pry
     braille.write(output)
     braille.close
   end
