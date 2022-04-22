@@ -1,10 +1,14 @@
 class Dictionary
 
-  attr_reader :name, :lookup_table
+  attr_reader :text_input, :lookup_table
 
-  def initialize(name)
-    @name = name
+  def initialize(input)
+    @text_input = split_text(input)
     @lookup_table = create_dictionary
+  end
+
+  def split_text(input)
+    input.split('')
   end
 
   def create_r
