@@ -58,6 +58,14 @@ RSpec.describe Dictionary do
     dictionary = Dictionary.new("h")
     dictionary.write_to_file
     # require 'pry'; binding.pry
-    expect(File.size("braille_test.txt")).to eq(8)
+    expect(File.size("braille.txt")).to eq(8)
   end
+
+  it 'can write multiple characters to the main file' do
+    dictionary = Dictionary.new("hello")
+    dictionary.write_to_file
+    # require 'pry'; binding.pry
+    expect(File.size("braille.txt")).to eq(40)
+  end
+
 end
