@@ -27,13 +27,13 @@ RSpec.describe Dictionary do
 
   it 'can populate the dictionary' do
     dictionary = Dictionary.new("Braille")
-    expect(dictionary.lookup_table["r"]).to eq("0.\n00\n0.")
+    expect(dictionary.lookup_table["r"]).to eq("0.000.")
   end
 
   it 'can read a letter in and output the brail' do
     dictionary = Dictionary.new("braille")
     expect(dictionary.write('~')). to eq("Invalid Input")
-    expect(dictionary.write('r')). to eq("0.\n00\n0.")
+    expect(dictionary.write('r')). to eq("0.000.")
   end
 
   it 'can populate all 26 lower case letters and have a space' do
@@ -46,11 +46,33 @@ RSpec.describe Dictionary do
     expect(dictionary.lookup_table.values.uniq.count).to eq(dictionary.lookup_table.values.count)
 
     array = dictionary.lookup_table.values
-    correct_length = 8
+    correct_length = 6
     place_holder = array.select do |letter|
       letter.length != correct_length
     end
 
     expect(place_holder.count).to eq(0)
   end
+
+  xit 'can write one character to a file' do
+    dictionary = Dictionary.new("h")
+    dictionary.write_to_file
+    # require 'pry'; binding.pry
+    expect(File.size("braille.txt")).to eq(8)
+  end
+
+  xit 'can write multiple characters to the main file' do
+    dictionary = Dictionary.new("hello world")
+    dictionary.write_to_file
+    # 11 characters times 6 plus 3 line indentations equals 69
+    expect(File.size("braille.txt")).to eq(69)
+  end
+
+  it 'can write a new line indentation' do
+    dictionary = Dictionary.new("aaaabbbbccccddddeeeeffffgggghhhhiiiijjjj")
+    dictionary.write_to_file
+    # 11 characters times 6 plus 3 line indentations equals 69
+    expect(File.size("braille.txt")).to eq(69)
+  end
+
 end
