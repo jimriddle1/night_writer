@@ -19,12 +19,14 @@ puts "Created '#{ARGV[1]}' containing #{character_count} characters"
 
 # puts "..\n00\n.."
 # puts '..\n00\n..'
-require 'pry'; binding.pry
+# require 'pry'; binding.pry
 
 braille.write(text)
+require 'pry'; binding.pry
+
+
 braille.close
 
-require 'pry'; binding.pry
 # require 'pry'; binding.pry
 # text.each do |letter|
 #

@@ -17,36 +17,36 @@ class Dictionary
 
   def create_dictionary
     hash = {}
-    hash["a"] = "0.\n..\n.."
-    hash["b"] = "0.\n0.\n.."
-    hash["c"] = "00\n..\n.."
-    hash["d"] = "00\n.0\n.."
-    hash["e"] = "0.\n.0\n.."
-    hash["f"] = "00\n0.\n.."
-    hash["g"] = "00\n00\n.."
+    hash["a"] = "0....."
+    hash["b"] = "0.0..."
+    hash["c"] = "00...."
+    hash["d"] = "00.0.."
+    hash["e"] = "0..0.."
+    hash["f"] = "000..."
+    hash["g"] = "0000.."
 
-    hash["h"] = "0.\n00\n.."
-    hash["i"] = ".0\n0.\n.."
-    hash["j"] = ".0\n00\n.."
-    hash["k"] = "0.\n..\n0."
-    hash["l"] = "0.\n0.\n0."
-    hash["m"] = "00\n..\n0."
-    hash["n"] = "00\n.0\n0."
-    hash["o"] = "0.\n.0\n0."
-    hash["p"] = "00\n0.\n0."
+    hash["h"] = "0.00.."
+    hash["i"] = ".00..."
+    hash["j"] = ".000.."
+    hash["k"] = "0...0."
+    hash["l"] = "0.0.0."
+    hash["m"] = "00..0."
+    hash["n"] = "00.00."
+    hash["o"] = "0..00."
+    hash["p"] = "000.0."
 
-    hash["q"] = "00\n00\n0."
-    hash["r"] = "0.\n00\n0."
-    hash["s"] = ".0\n0.\n0."
-    hash["t"] = ".0\n00\n0."
-    hash["u"] = "0.\n..\n00"
-    hash["v"] = "0.\n0.\n00"
-    hash["w"] = ".0\n00\n.0"
-    hash["x"] = "00\n..\n00"
-    hash["y"] = "00\n.0\n00"
-    hash["z"] = "0.\n.0\n00"
+    hash["q"] = "00000."
+    hash["r"] = "0.000."
+    hash["s"] = ".00.0."
+    hash["t"] = ".0000."
+    hash["u"] = "0...00"
+    hash["v"] = "0.0.00"
+    hash["w"] = ".000.0"
+    hash["x"] = "00..00"
+    hash["y"] = "00.000"
+    hash["z"] = "0..000"
 
-    hash[" "] = "..\n..\n.."
+    hash[" "] = "......"
     return hash
   end
 
@@ -59,14 +59,34 @@ class Dictionary
   end
 
   def write_to_file
+    line_numbers = @text_input.count / 20 + 1
+    # require 'pry'; binding.pry
     braille = File.open("braille.txt", "w")
+    top_row = ""
+    mid_row = ""
+    bot_row = ""
+    count = 0
+    @text_input.each do |character|
+      count += 1
+      top_row += "#{@lookup_table[character][0]}#{@lookup_table[character][1]}"
+      mid_row += "#{@lookup_table[character][2]}#{@lookup_table[character][3]}"
+      bot_row += "#{@lookup_table[character][4]}#{@lookup_table[character][5]}"
 
-    text = @text_input.map do |character|
-      @lookup_table[character]
+      if count % 40 == 0
+        braille.write("#{top_row}\n")
+        braille.write("#{mid_row}\n")
+        braille.write("#{bot_row}\n")
+        top_row = ""
+        mid_row = ""
+        bot_row = ""
+      end
     end
-    output = text.join
-    require 'pry'; binding.pry
-    braille.write(output)
+
+      braille.write("#{top_row}\n")
+      braille.write("#{mid_row}\n")
+      braille.write("#{bot_row}\n")
+    # output = text.join
+    # braille.write(output)
     braille.close
   end
 
