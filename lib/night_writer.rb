@@ -11,7 +11,7 @@ braille = File.open(file_name_2, "w")
 
 text_array = message.readlines
 text = text_array.join
-character_count = text_array.length - 1
+character_count = text.length - 1 #included the minus 1, because it has 2 lines
 
 
 puts "Created '#{ARGV[1]}' containing #{character_count} characters"
@@ -21,4 +21,8 @@ puts "Created '#{ARGV[1]}' containing #{character_count} characters"
 # puts '..\n00\n..'
 
 braille.write(text)
-# require 'pry'; binding.pry
+
+require 'pry'; binding.pry
+# text.each do |letter|
+#
+# end

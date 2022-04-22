@@ -20,4 +20,10 @@ RSpec.describe Dictionary do
     expect(dictionary.create_r).to eq(".0\n..\n.0")
   end
 
+  it 'can read a letter in and output the brail' do
+    dictionary = Dictionary.new("Braille")
+    expect(dictionary.write('~')). to eq("Invalid Input")
+    expect(dictionary.write('r')). to eq(".0\n..\n.0")
+  end
+
 end
