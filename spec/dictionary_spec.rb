@@ -105,8 +105,8 @@ RSpec.describe Dictionary do
   end
 
   it 'can take the rows of text and give me a letter' do
-    dictionary = Dictionary.new("0.\n00\n0.")
-    expect(dictinoary.rows_to_letters).to eq('h')
+    dictionary = Dictionary.new("0.\n00\n..")
+    expect(dictionary.rows_to_character).to eq('h')
   end
 
 end

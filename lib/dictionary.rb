@@ -43,6 +43,11 @@ class Dictionary
     [top_row, mid_row, bot_row]
   end
 
+  def rows_to_character
+    text = text_to_rows.join
+    @lookup_table.key(text)
+  end
+
   def is_braille?(text)
     text.length == (text.count("0") + text.count(".") + text.count("\n"))
   end
