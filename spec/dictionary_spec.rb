@@ -120,4 +120,16 @@ RSpec.describe Dictionary do
     expect(dictionary.read_characters).to eq('hr')
   end
 
+  it 'can convert multiple braille when the lines are longer than 40 chars' do
+    dictionary = Dictionary.new("0.0.0.0.0....00..0.0...0.0..0...0.0.00000.0...000..0.00.000...000.0...000.0.00.0\n
+                                00.00.0..0..00000.0...0.0.......0..0.000.000.....00.0...00.0..0..000..0.00....00\n
+                                ....0.0.0...0.....0.....0.......0.0.0.....0...0...0.0...........0.0...0.0.....0.\n
+                                .0000...000.0.000..00..0\n
+                                0....0..0...000..00..00.\n
+                                ........0.000.0.0.0...0.")
+    require "pry"; binding.pry
+    expect(dictionary.read_characters).to eq('')
+
+  end
+
 end
