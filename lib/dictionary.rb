@@ -52,17 +52,26 @@ class Dictionary
     message = ""
     letter = ""
     adjustable_text_to_rows = text_to_rows
+    is_cap = false
     while adjustable_text_to_rows.flatten.size != 0 do
       # require "pry"; binding.pry
       adjustable_text_to_rows.each do |row|
-        # require "pry"; binding.pry
         letter << row[0]
         letter << row[1]
         row.shift(2)
       end
-      message << @lookup_table.key(letter)
+      if @lookup_table.key(letter) == "cap"
+        is_cap = true
+      elsif is_cap == true
+        # require 'pry'; binding.pry
+        message << @lookup_table.key(letter).upcase
+        is_cap = false
+      else
+        message << @lookup_table.key(letter)
+      end
+
       letter = ""
-      # require 'pry'; binding.pry
+
     end
 
     original_message = File.open("original_message.txt", "w")
@@ -110,11 +119,14 @@ class Dictionary
     hash["z"] = "0..000"
 
     hash[" "] = "......"
+    hash["cap"] = ".....0"
     return hash
   end
 
-  def write(character)
-    if @lookup_table.keys.include?(character) == false
+  def write_brail(character)
+    if character == character.upcase && character != character.downcase && @lookup_table.keys.include?(character.downcase)
+      "Capital"
+    elsif @lookup_table.keys.include?(character) == false
       "Invalid Input"
     else
       @lookup_table[character]
@@ -128,17 +140,29 @@ class Dictionary
     bot_row = ""
     count = 0
     @text_input.each do |character|
-      count += 1
-      top_row += "#{@lookup_table[character][0]}#{@lookup_table[character][1]}"
-      mid_row += "#{@lookup_table[character][2]}#{@lookup_table[character][3]}"
-      bot_row += "#{@lookup_table[character][4]}#{@lookup_table[character][5]}"
-      if count % 40 == 0
-        braille.write("#{top_row}\n")
-        braille.write("#{mid_row}\n")
-        braille.write("#{bot_row}\n")
-        top_row = ""
-        mid_row = ""
-        bot_row = ""
+      if write_brail(character) == "Invalid Input"
+        braille.write("Invalid Input, put something else")
+        break
+      else
+        count += 1
+        if character == character.upcase && character != character.downcase
+          top_row += "#{write_brail("cap")[0]}#{write_brail("cap")[1]}"
+          mid_row += "#{write_brail("cap")[2]}#{write_brail("cap")[3]}"
+          bot_row += "#{write_brail("cap")[4]}#{write_brail("cap")[5]}"
+          count += 1
+        end
+
+        top_row += "#{write_brail(character.downcase)[0]}#{write_brail(character.downcase)[1]}"
+        mid_row += "#{write_brail(character.downcase)[2]}#{write_brail(character.downcase)[3]}"
+        bot_row += "#{write_brail(character.downcase)[4]}#{write_brail(character.downcase)[5]}"
+        if count % 40 == 0
+          braille.write("#{top_row}\n")
+          braille.write("#{mid_row}\n")
+          braille.write("#{bot_row}\n")
+          top_row = ""
+          mid_row = ""
+          bot_row = ""
+        end
       end
     end
       braille.write("#{top_row}\n")
