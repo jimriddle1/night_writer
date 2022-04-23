@@ -52,15 +52,24 @@ class Dictionary
     message = ""
     letter = ""
     adjustable_text_to_rows = text_to_rows
+    is_cap = false
     while adjustable_text_to_rows.flatten.size != 0 do
       # require "pry"; binding.pry
       adjustable_text_to_rows.each do |row|
-
         letter << row[0]
         letter << row[1]
         row.shift(2)
       end
-      message << @lookup_table.key(letter)
+      if @lookup_table.key(letter) == "cap"
+        is_cap = true
+      elsif is_cap == true
+        # require 'pry'; binding.pry
+        message << @lookup_table.key(letter).upcase
+        is_cap = false
+      else
+        message << @lookup_table.key(letter)
+      end
+
       letter = ""
 
     end

@@ -165,4 +165,8 @@ RSpec.describe Dictionary do
     expect(File.size("braille.txt")).to eq(38)
   end
 
+  it 'can read capital letters' do
+    
+  end
+
 end
