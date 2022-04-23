@@ -67,6 +67,12 @@ RSpec.describe Dictionary do
     expect(dictionary.text_input).to eq(dictionary_2.text_input)
   end
 
+  it 'can know when the braille input has a line break at the end vs. not' do
+    dictionary = Dictionary.new("0.\n00\n..")
+    dictionary_2 = Dictionary.new("0.\n00\n..\n")
+    expect(dictionary.text_input).to eq(dictionary_2.text_input)
+  end
+
   it 'can write multiple characters to the main file' do
     dictionary = Dictionary.new("hello world")
     dictionary.write_braille_to_file
@@ -107,6 +113,11 @@ RSpec.describe Dictionary do
   it 'can take the rows of text and give me a letter' do
     dictionary = Dictionary.new("0.\n00\n..")
     expect(dictionary.rows_to_character).to eq('h')
+  end
+
+  it 'can convert multiple braille characters to letters' do
+    dictionary = Dictionary.new("0.0.\n0000\n..0.\n")
+    expect(dictionary.read_characters).to eq('hr')
   end
 
 end
