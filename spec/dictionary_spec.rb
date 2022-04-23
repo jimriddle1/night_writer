@@ -32,8 +32,8 @@ RSpec.describe Dictionary do
 
   it 'can read a letter in and output the brail' do
     dictionary = Dictionary.new("braille")
-    expect(dictionary.write('~')). to eq("Invalid Input")
-    expect(dictionary.write('r')). to eq("0.000.")
+    expect(dictionary.write_brail('~')). to eq("Invalid Input")
+    expect(dictionary.write_brail('r')). to eq("0.000.")
   end
 
   it 'can populate all 26 lower case letters and have a space' do
@@ -136,6 +136,18 @@ RSpec.describe Dictionary do
     # require "pry"; binding.pry
     expect(dictionary.read_characters).to eq('hello this is a longer message for practice purposes')
 
+  end
+
+  it 'can check when writing to file for invalid input' do
+    dictionary = Dictionary.new("~~~")
+    expect(dictionary.write_braille_to_file).to eq("invalid")
+  end
+
+  it 'can handle capital letters' do
+    dictionary = Dictionary.new("B")
+
+    dictionary.write_braille_to_file
+    expect(File.size("braille.txt")).to eq(14)
   end
 
 end
