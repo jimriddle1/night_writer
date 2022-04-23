@@ -115,7 +115,7 @@ class Dictionary
   end
 
   def write_brail(character)
-    if character == character.upcase && @lookup_table.keys.include?(character.downcase)
+    if character == character.upcase && character != character.downcase && @lookup_table.keys.include?(character.downcase)
       "Capital"
     elsif @lookup_table.keys.include?(character) == false
       "Invalid Input"
@@ -132,13 +132,21 @@ class Dictionary
     count = 0
     @text_input.each do |character|
       if write_brail(character) == "Invalid Input"
+        require 'pry'; binding.pry
         braille.write("Invalid Input, put something else")
         return "invalid"
       else
         count += 1
-        top_row += "#{write_brail(character)[0]}#{write_brail(character)[1]}"
-        mid_row += "#{write_brail(character)[2]}#{write_brail(character)[3]}"
-        bot_row += "#{write_brail(character)[4]}#{write_brail(character)[5]}"
+        if character == character.upcase && character != character.downcase
+          top_row += "#{write_brail("cap")[0]}#{write_brail("cap")[1]}"
+          mid_row += "#{write_brail("cap")[2]}#{write_brail("cap")[3]}"
+          bot_row += "#{write_brail("cap")[4]}#{write_brail("cap")[5]}"
+          count += 1
+        end
+
+        top_row += "#{write_brail(character.downcase)[0]}#{write_brail(character.downcase)[1]}"
+        mid_row += "#{write_brail(character.downcase)[2]}#{write_brail(character.downcase)[3]}"
+        bot_row += "#{write_brail(character.downcase)[4]}#{write_brail(character.downcase)[5]}"
         if count % 40 == 0
           braille.write("#{top_row}\n")
           braille.write("#{mid_row}\n")
