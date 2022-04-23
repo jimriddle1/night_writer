@@ -87,7 +87,7 @@ RSpec.describe Dictionary do
     expect(File.size("braille.txt")).to eq(251)
   end
 
-  xit 'my split text method can handle braille / not braille' do
+  it 'my split text method can handle braille / not braille' do
     dictionary = Dictionary.new("hello world")
     expect(dictionary.split_text("abc")).to eq(['a','b','c'])
     expect(dictionary.split_text("0.\n00\n0.")).to eq(["0", ".", "\n", "0", "0", "\n", "0", "."])
@@ -96,7 +96,7 @@ RSpec.describe Dictionary do
     expect(dictionary.split_text("0.0.00..\n0000..00\n..0.0.0.\n0.\n..\n.0")).to eq(expected)
   end
 
-  xit 'can check if the input is braille or not' do
+  it 'can check if the input is braille or not' do
     dictionary = Dictionary.new("hello world")
     expect(dictionary.is_braille?("abc")).to eq(false)
     expect(dictionary.is_braille?("abc\ndef")).to eq(false)
@@ -104,18 +104,18 @@ RSpec.describe Dictionary do
     expect(dictionary.is_braille?("0.0.00..\n0000..00\n..0.0.0.\n0.\n..\n.0")).to eq(true)
   end
 
-  xit 'can split up my braille input into an array of top mid bot row' do
+  it 'can split up my braille input into an array of top mid bot row' do
     dictionary = Dictionary.new("0.\n00\n0.")
     # expected = [['0.'],['00'],['0.']]
     expect(dictionary.text_to_rows).to eq([['0','.'],['0','0'],['0','.']])
   end
 
-  xit 'can take the rows of text and give me a letter' do
+  it 'can take the rows of text and give me a letter' do
     dictionary = Dictionary.new("0.\n00\n..")
     expect(dictionary.rows_to_character).to eq('h')
   end
 
-  xit 'can convert multiple braille characters to letters' do
+  it 'can convert multiple braille characters to letters' do
     dictionary = Dictionary.new("0.0.\n0000\n..0.\n")
     expect(dictionary.read_characters).to eq('hr')
   end
