@@ -36,9 +36,9 @@ RSpec.describe Dictionary do
     expect(dictionary.write_brail('r')). to eq("0.000.")
   end
 
-  it 'can populate all 26 lower case letters and have a space' do
+  it 'can populate all 26 lower case letters, have a capital return and have a space' do
     dictionary = Dictionary.new("braille")
-    expect(dictionary.lookup_table.count).to eq(27)
+    expect(dictionary.lookup_table.count).to eq(28)
   end
 
   it 'can verify uniquness and length of each braille character' do
@@ -76,6 +76,7 @@ RSpec.describe Dictionary do
   it 'can write multiple characters to the main file' do
     dictionary = Dictionary.new("hello world")
     dictionary.write_braille_to_file
+    # require 'pry'; binding.pry
     # 11 characters times 6 plus 2 line indentations equals 69
     expect(File.size("braille.txt")).to eq(68)
   end
@@ -140,14 +141,28 @@ RSpec.describe Dictionary do
 
   it 'can check when writing to file for invalid input' do
     dictionary = Dictionary.new("~~~")
-    expect(dictionary.write_braille_to_file).to eq("invalid")
+    expect(dictionary.write_braille_to_file).to eq(nil)
+  end
+
+  it 'can check to see if a letter is capital' do
+    dictionary = Dictionary.new("hello")
+    expect(dictionary.write_brail("B")).to eq("Capital")
   end
 
   it 'can handle capital letters' do
     dictionary = Dictionary.new("B")
 
     dictionary.write_braille_to_file
+    # require 'pry'; binding.pry
     expect(File.size("braille.txt")).to eq(14)
+  end
+
+  it 'can handle multiple capital letters' do
+    dictionary = Dictionary.new("Ba B")
+
+    dictionary.write_braille_to_file
+    # require 'pry'; binding.pry
+    expect(File.size("braille.txt")).to eq(38)
   end
 
 end

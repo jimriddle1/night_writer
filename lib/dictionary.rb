@@ -132,9 +132,8 @@ class Dictionary
     count = 0
     @text_input.each do |character|
       if write_brail(character) == "Invalid Input"
-        require 'pry'; binding.pry
         braille.write("Invalid Input, put something else")
-        return "invalid"
+        break
       else
         count += 1
         if character == character.upcase && character != character.downcase
