@@ -32,11 +32,11 @@ class Dictionary
     bot_row = []
     @text_input.each do |letter|
       return_count += 1 if letter == "\n"
-      if return_count == 0
+      if return_count % 3 == 0
         top_row << letter if letter != "\n"
-      elsif return_count == 1
+      elsif return_count % 3 == 1
         mid_row << letter if letter != "\n"
-      else return_count == 2
+      else return_count % 3 == 2
         bot_row << letter if letter != "\n"
       end
     end
@@ -62,7 +62,9 @@ class Dictionary
       end
       message << @lookup_table.key(letter)
       letter = ""
+      # require 'pry'; binding.pry
     end
+
     original_message = File.open("original_message.txt", "w")
     original_message.write(message)
     return message
