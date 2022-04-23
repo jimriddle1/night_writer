@@ -87,7 +87,7 @@ RSpec.describe Dictionary do
     expect(File.size("braille.txt")).to eq(251)
   end
 
-  it 'my split text method can handle braille / not braille' do
+  xit 'my split text method can handle braille / not braille' do
     dictionary = Dictionary.new("hello world")
     expect(dictionary.split_text("abc")).to eq(['a','b','c'])
     expect(dictionary.split_text("0.\n00\n0.")).to eq(["0", ".", "\n", "0", "0", "\n", "0", "."])
@@ -96,7 +96,7 @@ RSpec.describe Dictionary do
     expect(dictionary.split_text("0.0.00..\n0000..00\n..0.0.0.\n0.\n..\n.0")).to eq(expected)
   end
 
-  it 'can check if the input is braille or not' do
+  xit 'can check if the input is braille or not' do
     dictionary = Dictionary.new("hello world")
     expect(dictionary.is_braille?("abc")).to eq(false)
     expect(dictionary.is_braille?("abc\ndef")).to eq(false)
@@ -104,25 +104,36 @@ RSpec.describe Dictionary do
     expect(dictionary.is_braille?("0.0.00..\n0000..00\n..0.0.0.\n0.\n..\n.0")).to eq(true)
   end
 
-  it 'can split up my braille input into an array of top mid bot row' do
+  xit 'can split up my braille input into an array of top mid bot row' do
     dictionary = Dictionary.new("0.\n00\n0.")
     # expected = [['0.'],['00'],['0.']]
     expect(dictionary.text_to_rows).to eq([['0','.'],['0','0'],['0','.']])
   end
 
-  it 'can take the rows of text and give me a letter' do
+  xit 'can take the rows of text and give me a letter' do
     dictionary = Dictionary.new("0.\n00\n..")
     expect(dictionary.rows_to_character).to eq('h')
   end
 
-  it 'can convert multiple braille characters to letters' do
+  xit 'can convert multiple braille characters to letters' do
     dictionary = Dictionary.new("0.0.\n0000\n..0.\n")
     expect(dictionary.read_characters).to eq('hr')
   end
 
+  it 'can handle two braille characters on different rows' do
+    # dictionary = Dictionary.new("0.0.0.0.0....00..0.0...0.0..0...0.0.00000.0...000..0.00.000...000.0...000.0.00.0\n00.00.0..0..00000.0...0.0.......0..0.000.000.....00.0...00.0..0..000..0.00....00\n....0.0.0...0.....0.....0.......0.0.0.....0...0...0.0...........0.0...0.0.....0.\n.0000...000.0.000..00..0\n0....0..0...000..00..00.\n........0.000.0.0.0...0.")
+    dictionary = Dictionary.new("..\n..\n..\n0.\n00\n0.")
+    # dictionary = Dictionary.new("ab\ncd\nef\nhi\njk\n0.\n")
+    # require "pry"; binding.pry
+    expect(dictionary.read_characters).to eq(' r')
+
+  end
+
   it 'can convert multiple braille when the lines are longer than 40 chars' do
     dictionary = Dictionary.new("0.0.0.0.0....00..0.0...0.0..0...0.0.00000.0...000..0.00.000...000.0...000.0.00.0\n00.00.0..0..00000.0...0.0.......0..0.000.000.....00.0...00.0..0..000..0.00....00\n....0.0.0...0.....0.....0.......0.0.0.....0...0...0.0...........0.0...0.0.....0.\n.0000...000.0.000..00..0\n0....0..0...000..00..00.\n........0.000.0.0.0...0.")
-    require "pry"; binding.pry
+    # dictionary = Dictionary.new("..\n..\n..\n0.\n00\n0.")
+    # dictionary = Dictionary.new("ab\ncd\nef\nhi\njk\n0.\n")
+    # require "pry"; binding.pry
     expect(dictionary.read_characters).to eq('hello this is a longer message for practice purposes')
 
   end
