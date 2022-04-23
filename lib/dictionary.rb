@@ -1,15 +1,77 @@
 class Dictionary
 
-  attr_reader :text_input, :lookup_table
+  attr_reader :text_input, :lookup_table, :input_braille
 
   def initialize(input)
     @text_input = split_text(input)
     @lookup_table = create_dictionary
+    @input_braille = is_braille?(input)
   end
 
   def split_text(input)
-    input.split('')[0..-2]
-    #for some reason my message txt file always has an extra line at the end
+    if is_braille?(input)
+      braille_text = input.split('')
+      # require 'pry'; binding.pry
+      if braille_text[-1] == "\n"
+        return braille_text[0..-2]
+      end
+      return braille_text
+    else
+      text = input.split('')
+      if text[-1] == "\n"
+        return text[0..-2]
+      end
+      return text
+    end
+  end
+
+  def text_to_rows
+    return_count = 0
+    top_row = []
+    mid_row = []
+    bot_row = []
+    @text_input.each do |letter|
+      return_count += 1 if letter == "\n"
+      if return_count % 3 == 0
+        top_row << letter if letter != "\n"
+      elsif return_count % 3 == 1
+        mid_row << letter if letter != "\n"
+      else return_count % 3 == 2
+        bot_row << letter if letter != "\n"
+      end
+    end
+    [top_row, mid_row, bot_row]
+  end
+
+  def rows_to_character
+    braille_text = text_to_rows.join
+    @lookup_table.key(braille_text)
+  end
+
+  def read_characters
+    message = ""
+    letter = ""
+    adjustable_text_to_rows = text_to_rows
+    while adjustable_text_to_rows.flatten.size != 0 do
+      # require "pry"; binding.pry
+      adjustable_text_to_rows.each do |row|
+        # require "pry"; binding.pry
+        letter << row[0]
+        letter << row[1]
+        row.shift(2)
+      end
+      message << @lookup_table.key(letter)
+      letter = ""
+      # require 'pry'; binding.pry
+    end
+
+    original_message = File.open("original_message.txt", "w")
+    original_message.write(message)
+    return message
+  end
+
+  def is_braille?(text)
+    text.length == (text.count("0") + text.count(".") + text.count("\n"))
   end
 
   def create_r
@@ -59,7 +121,7 @@ class Dictionary
     end
   end
 
-  def write_to_file
+  def write_braille_to_file
     braille = File.open("braille.txt", "w")
     top_row = ""
     mid_row = ""
@@ -81,7 +143,7 @@ class Dictionary
     end
       braille.write("#{top_row}\n")
       braille.write("#{mid_row}\n")
-      braille.write("#{bot_row}\n")
+      braille.write("#{bot_row}")
     braille.close
   end
 
