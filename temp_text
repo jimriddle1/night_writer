@@ -29,3 +29,7 @@ hash["z"] = "0.\n.0\n00"
 
 
 if it's 2, i have one line, if it's 5 i have 2, if it's 8, i have 3 etc.
+
+
+first character = 014589
+second character = 23671011

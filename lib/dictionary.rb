@@ -52,8 +52,8 @@ class Dictionary
     message = ""
     letter = ""
     adjustable_text_to_rows = text_to_rows
-    # while adjustable_text_to_rows.size != 0 do
-    2.times do 
+    while adjustable_text_to_rows.flatten.size != 0 do
+      # require "pry"; binding.pry
       adjustable_text_to_rows.each do |row|
         # require "pry"; binding.pry
         letter << row[0]
@@ -62,14 +62,10 @@ class Dictionary
       end
       message << @lookup_table.key(letter)
       letter = ""
-      # adjustable_text_to_rows[0].shift(2)
-      # adjustable_text_to_rows[1].shift(2)
-      # adjustable_text_to_rows[2].shift(2)
-      # require "pry"; binding.pry
     end
-    require "pry"; binding.pry
-    message
-
+    original_message = File.open("original_message.txt", "w")
+    original_message.write(message)
+    return message
   end
 
   def is_braille?(text)
