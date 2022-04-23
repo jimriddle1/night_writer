@@ -26,7 +26,7 @@ RSpec.describe Dictionary do
   end
 
   it 'can populate the dictionary' do
-    dictionary = Dictionary.new("Braille")
+    dictionary = Dictionary.new("braille")
     expect(dictionary.lookup_table["r"]).to eq("0.000.")
   end
 
@@ -56,7 +56,7 @@ RSpec.describe Dictionary do
 
   it 'can write one character to a file' do
     dictionary = Dictionary.new("h")
-    dictionary.write_to_file
+    dictionary.write_braille_to_file
     # require 'pry'; binding.pry
     expect(File.size("braille.txt")).to eq(8)
   end
@@ -69,16 +69,29 @@ RSpec.describe Dictionary do
 
   it 'can write multiple characters to the main file' do
     dictionary = Dictionary.new("hello world")
-    dictionary.write_to_file
+    dictionary.write_braille_to_file
     # 11 characters times 6 plus 2 line indentations equals 69
     expect(File.size("braille.txt")).to eq(68)
   end
 
   it 'can write a new line indentation' do
     dictionary = Dictionary.new("aaaabbbbccccddddeeeeffffgggghhhhiiiijjjjk")
-    dictionary.write_to_file
+    dictionary.write_braille_to_file
     # 41 characters * 6 plus 5 (3 for new line, 2 for second) line indentations = 251
     expect(File.size("braille.txt")).to eq(251)
   end
+
+  it 'breaks out my split_text method into two helper methods' do
+    dictionary = Dictionary.new("hello world")
+    expect(dictionary.split_text("abc")).to eq(['a','b','c'])
+    expect(dictionary.split_text("00.0..00000.")).to eq(['00','.0','..'])
+  end
+
+  it 'can check if the input is braille or not' do
+    dictionary = Dictionary.new("hello world")
+    expect(dictionary.is_braille?("abc")).to eq(false)
+    expect(dictionary.is_braille?("abc\ndef")).to eq(false)
+    expect(dictionary.is_braille?("0.\n00\n0.")).to eq(true)
+    expect(dictionary.is_braille?("0.0.00..\n0000..00\n..0.0.0.\n0.\n..\n.0")).to eq(true)
 
 end

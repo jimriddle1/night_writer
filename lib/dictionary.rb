@@ -1,17 +1,24 @@
 class Dictionary
 
-  attr_reader :text_input, :lookup_table
+  attr_reader :text_input, :lookup_table, :is_braille
 
   def initialize(input)
     @text_input = split_text(input)
     @lookup_table = create_dictionary
+    @is_braille = false
   end
 
   def split_text(input)
+    # if input.include?("/n")
+    #
+    # else
+    #
+    # end
     text = input.split('')
     if text[-1] == "\n"
       return text[0..-2]
     end
+    # require 'pry'; binding.pry
     return text
   end
 
@@ -62,7 +69,7 @@ class Dictionary
     end
   end
 
-  def write_to_file
+  def write_braille_to_file
     braille = File.open("braille.txt", "w")
     top_row = ""
     mid_row = ""

@@ -8,10 +8,15 @@ end
 message = File.open(ARGV[0], "r")
 braille = File.open(ARGV[1], "w")
 
+
+
 text = message.readlines.join
-character_count = text.length - 1 #included the minus 1, because it has 2 lines
+character_count = text.length - 1
+
 
 dictionary = Dictionary.new(text)
+
+require "pry"; binding.pry
 
 puts "Created '#{ARGV[1]}' containing #{character_count} characters"
 
@@ -19,7 +24,7 @@ dictionary.write_to_file
 braille.close
 
 
-# ruby lib/night_writer.rb message.txt braille.txt
+# ruby lib/night_reader.rb braille_test.txt original_message.txt
 
 
 # 0.

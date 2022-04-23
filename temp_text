@@ -26,3 +26,6 @@ hash["w"] = ".0\n00\n.0"
 hash["x"] = "00\n..\n00"
 hash["y"] = "00\n.0\n00"
 hash["z"] = "0.\n.0\n00"
+
+
+if it's 2, i have one line, if it's 5 i have 2, if it's 8, i have 3 etc.
