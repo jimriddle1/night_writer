@@ -98,4 +98,15 @@ RSpec.describe Dictionary do
     expect(dictionary.is_braille?("0.0.00..\n0000..00\n..0.0.0.\n0.\n..\n.0")).to eq(true)
   end
 
+  it 'can split up my braille input into an array of top mid bot row' do
+    dictionary = Dictionary.new("0.\n00\n0.")
+    # expected = [['0.'],['00'],['0.']]
+    expect(dictionary.text_to_rows).to eq([['0','.'],['0','0'],['0','.']])
+  end
+
+  it 'can take the rows of text and give me a letter' do
+    dictionary = Dictionary.new("0.\n00\n0.")
+    expect(dictinoary.rows_to_letters).to eq('h')
+  end
+
 end
