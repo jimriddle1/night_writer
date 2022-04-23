@@ -1,28 +1,26 @@
 class Dictionary
 
-  attr_reader :text_input, :lookup_table, :is_braille
+  attr_reader :text_input, :lookup_table, :input_braille
 
   def initialize(input)
     @text_input = split_text(input)
     @lookup_table = create_dictionary
-    @is_braille = false
+    @input_braille = is_braille?(input)
   end
 
   def split_text(input)
-    # if input.include?("/n")
-    #
-    # else
-    #
-    # end
-    text = input.split('')
-    if text[-1] == "\n"
-      return text[0..-2]
+    if is_braille?(input)
+      input.split('')
+    else
+      text = input.split('')
+      if text[-1] == "\n"
+        return text[0..-2]
+      end
+      return text
     end
-    return text
   end
 
   def is_braille?(text)
-    # require 'pry'; binding.pry
     text.length == (text.count("0") + text.count(".") + text.count("\n"))
   end
 
