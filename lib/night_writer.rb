@@ -14,7 +14,7 @@ character_count = text.length - 1 #included the minus 1, because it has 2 lines
 
 dictionary = Dictionary.new(text)
 
-require "pry"; binding.pry
+# require "pry"; binding.pry
 puts "Created '#{ARGV[1]}' containing #{character_count} characters"
 
 dictionary.write_braille_to_file
