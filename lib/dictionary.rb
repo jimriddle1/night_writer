@@ -10,7 +10,12 @@ class Dictionary
 
   def split_text(input)
     if is_braille?(input)
-      input.split('')
+      braille_text = input.split('')
+      # require 'pry'; binding.pry
+      if braille_text[-1] == "\n"
+        return braille_text[0..-2]
+      end
+      return braille_text
     else
       text = input.split('')
       if text[-1] == "\n"
@@ -18,6 +23,24 @@ class Dictionary
       end
       return text
     end
+  end
+
+  def text_to_rows
+    return_count = 0
+    top_row = []
+    mid_row = []
+    bot_row = []
+    @text_input.each do |letter|
+      return_count += 1 if letter == "\n"
+      if return_count == 0
+        top_row << letter if letter != "\n"
+      elsif return_count == 1
+        mid_row << letter if letter != "\n"
+      else return_count == 2
+        bot_row << letter if letter != "\n"
+      end
+    end
+    [top_row, mid_row, bot_row]
   end
 
   def is_braille?(text)
