@@ -84,7 +84,7 @@ class Dictionary
     end
       braille.write("#{top_row}\n")
       braille.write("#{mid_row}\n")
-      braille.write("#{bot_row}\n")
+      braille.write("#{bot_row}")
     braille.close
   end
 
