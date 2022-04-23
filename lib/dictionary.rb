@@ -44,8 +44,32 @@ class Dictionary
   end
 
   def rows_to_character
-    text = text_to_rows.join
-    @lookup_table.key(text)
+    braille_text = text_to_rows.join
+    @lookup_table.key(braille_text)
+  end
+
+  def read_characters
+    message = ""
+    letter = ""
+    adjustable_text_to_rows = text_to_rows
+    # while adjustable_text_to_rows.size != 0 do
+    2.times do 
+      adjustable_text_to_rows.each do |row|
+        # require "pry"; binding.pry
+        letter << row[0]
+        letter << row[1]
+        row.shift(2)
+      end
+      message << @lookup_table.key(letter)
+      letter = ""
+      # adjustable_text_to_rows[0].shift(2)
+      # adjustable_text_to_rows[1].shift(2)
+      # adjustable_text_to_rows[2].shift(2)
+      # require "pry"; binding.pry
+    end
+    require "pry"; binding.pry
+    message
+
   end
 
   def is_braille?(text)
