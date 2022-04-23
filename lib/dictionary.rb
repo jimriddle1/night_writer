@@ -18,8 +18,12 @@ class Dictionary
     if text[-1] == "\n"
       return text[0..-2]
     end
-    # require 'pry'; binding.pry
     return text
+  end
+
+  def is_braille?(text)
+    # require 'pry'; binding.pry
+    text.length == (text.count("0") + text.count(".") + text.count("\n"))
   end
 
   def create_r

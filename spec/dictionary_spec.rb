@@ -81,7 +81,7 @@ RSpec.describe Dictionary do
     expect(File.size("braille.txt")).to eq(251)
   end
 
-  it 'breaks out my split_text method into two helper methods' do
+  xit 'breaks out my split_text method into two helper methods' do
     dictionary = Dictionary.new("hello world")
     expect(dictionary.split_text("abc")).to eq(['a','b','c'])
     expect(dictionary.split_text("00.0..00000.")).to eq(['00','.0','..'])
@@ -93,5 +93,6 @@ RSpec.describe Dictionary do
     expect(dictionary.is_braille?("abc\ndef")).to eq(false)
     expect(dictionary.is_braille?("0.\n00\n0.")).to eq(true)
     expect(dictionary.is_braille?("0.0.00..\n0000..00\n..0.0.0.\n0.\n..\n.0")).to eq(true)
+  end
 
 end
