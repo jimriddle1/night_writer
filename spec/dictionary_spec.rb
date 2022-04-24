@@ -111,10 +111,10 @@ RSpec.describe Dictionary do
     expect(dictionary.text_to_rows).to eq([['0','.'],['0','0'],['0','.']])
   end
 
-  it 'can take the rows of text and give me a letter' do
-    dictionary = Dictionary.new("0.\n00\n..")
-    expect(dictionary.rows_to_character).to eq('h')
-  end
+  # xit 'can take the rows of text and give me a letter' do
+  #   dictionary = Dictionary.new("0.\n00\n..")
+  #   expect(dictionary.rows_to_character).to eq('h')
+  # end
 
   it 'can convert multiple braille characters to letters' do
     dictionary = Dictionary.new("0.0.\n0000\n..0.\n")

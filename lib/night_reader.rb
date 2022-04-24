@@ -14,7 +14,7 @@ character_count = text.length - 1
 
 dictionary = Dictionary.new(text)
 
-require "pry"; binding.pry
+# require "pry"; binding.pry
 
 puts "Created '#{ARGV[1]}' containing #{character_count} characters"
 

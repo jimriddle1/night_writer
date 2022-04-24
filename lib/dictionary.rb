@@ -43,10 +43,10 @@ class Dictionary
     [top_row, mid_row, bot_row]
   end
 
-  def rows_to_character
-    braille_text = text_to_rows.join
-    @lookup_table.key(braille_text)
-  end
+  # def rows_to_character
+  #   braille_text = text_to_rows.join
+  #   @lookup_table.key(braille_text)
+  # end
 
   def read_characters
     message = ""
