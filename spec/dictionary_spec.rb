@@ -170,4 +170,14 @@ RSpec.describe Dictionary do
     expect(dictionary.read_characters).to eq("Ba B")
   end
 
+  it 'can write braille or english to file based on one method' do
+    dictionary = Dictionary.new("..0.0.....0.\n..0.......0.\n.0.......0..")
+    expect(dictionary.write_to_file).to eq("Ba B")
+
+    dictionary_2 = Dictionary.new("hr")
+    expect(dictionary.write_to_file).to eq("0.0.\n0000\n..0.\n")
+    # dictionary_2 = Dictionary.new("0.0.\n0000\n..0.\n")
+
+  end
+
 end
