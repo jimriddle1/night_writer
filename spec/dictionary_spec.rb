@@ -149,7 +149,7 @@ RSpec.describe Dictionary do
     expect(dictionary.write_brail("B")).to eq("Capital")
   end
 
-  it 'can handle capital letters' do
+  it 'can handle a capital letter' do
     dictionary = Dictionary.new("B")
 
     dictionary.write_braille_to_file
@@ -166,7 +166,8 @@ RSpec.describe Dictionary do
   end
 
   it 'can read capital letters' do
-    
+    dictionary = Dictionary.new("..0.0.....0.\n..0.......0.\n.0.......0..")
+    expect(dictionary.read_characters).to eq("Ba B")
   end
 
 end
