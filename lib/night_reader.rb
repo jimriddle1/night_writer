@@ -18,7 +18,7 @@ dictionary = Dictionary.new(text)
 
 puts "Created '#{ARGV[1]}' containing #{character_count} characters"
 
-dictionary.read_characters
+dictionary.write_to_file
 braille.close
 
 

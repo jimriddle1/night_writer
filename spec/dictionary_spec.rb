@@ -141,7 +141,7 @@ RSpec.describe Dictionary do
 
   it 'can check when writing to file for invalid input' do
     dictionary = Dictionary.new("~~~")
-    expect(dictionary.write_braille_to_file).to eq(nil)
+    expect(dictionary.write_braille_to_file).to eq("Invalid Input")
   end
 
   it 'can check to see if a letter is capital' do
@@ -175,8 +175,8 @@ RSpec.describe Dictionary do
     expect(dictionary.write_to_file).to eq("Ba B")
 
     dictionary_2 = Dictionary.new("hr")
-    expect(dictionary.write_to_file).to eq("0.0.\n0000\n..0.\n")
-    # dictionary_2 = Dictionary.new("0.0.\n0000\n..0.\n")
+    dictionary_2.write_to_file
+    expect(File.size("braille.txt")).to eq(14)
 
   end
 
