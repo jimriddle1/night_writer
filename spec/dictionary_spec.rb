@@ -111,10 +111,10 @@ RSpec.describe Dictionary do
     expect(dictionary.text_to_rows).to eq([['0','.'],['0','0'],['0','.']])
   end
 
-  it 'can take the rows of text and give me a letter' do
-    dictionary = Dictionary.new("0.\n00\n..")
-    expect(dictionary.rows_to_character).to eq('h')
-  end
+  # xit 'can take the rows of text and give me a letter' do
+  #   dictionary = Dictionary.new("0.\n00\n..")
+  #   expect(dictionary.rows_to_character).to eq('h')
+  # end
 
   it 'can convert multiple braille characters to letters' do
     dictionary = Dictionary.new("0.0.\n0000\n..0.\n")
@@ -141,7 +141,7 @@ RSpec.describe Dictionary do
 
   it 'can check when writing to file for invalid input' do
     dictionary = Dictionary.new("~~~")
-    expect(dictionary.write_braille_to_file).to eq(nil)
+    expect(dictionary.write_braille_to_file).to eq("Invalid Input")
   end
 
   it 'can check to see if a letter is capital' do
@@ -149,7 +149,7 @@ RSpec.describe Dictionary do
     expect(dictionary.write_brail("B")).to eq("Capital")
   end
 
-  it 'can handle capital letters' do
+  it 'can handle a capital letter' do
     dictionary = Dictionary.new("B")
 
     dictionary.write_braille_to_file
@@ -166,7 +166,18 @@ RSpec.describe Dictionary do
   end
 
   it 'can read capital letters' do
-    
+    dictionary = Dictionary.new("..0.0.....0.\n..0.......0.\n.0.......0..")
+    expect(dictionary.read_characters).to eq("Ba B")
+  end
+
+  it 'can write braille or english to file based on one method' do
+    dictionary = Dictionary.new("..0.0.....0.\n..0.......0.\n.0.......0..")
+    expect(dictionary.write_to_file).to eq("Ba B")
+
+    dictionary_2 = Dictionary.new("hr")
+    dictionary_2.write_to_file
+    expect(File.size("braille.txt")).to eq(14)
+
   end
 
 end
